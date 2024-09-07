@@ -25,23 +25,49 @@ class Rank():
 
     def get_chips(self):
         return self._VALUES[self.rank]
+    
+    def __str__(self):
+        return f"{self.rank}"
+    
+    def __repr__(self):
+        return self.__str__()
 
 class Suit(Enum):
     SPADES = 0
     DIAMONDS = 1
     CLUBS = 2
     HEARTS = 3
-Suit.ALL_SUITS = [Suit(x) for x in range(4)] # TODO: can we get rid of this magic number?
+
+    def __str__(self):
+        match self:
+            case Suit.SPADES:
+                return "Spades"
+            case Suit.DIAMONDS:
+                return "Diamonds"
+            case Suit.CLUBS:
+                return "Clubs"
+            case Suit.HEARTS:
+                return "Hearts"
+    
+    def __repr__(self):
+        return self.__str()
 
 class Card():
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
+    
+    def __str__(self):
+        return f"{self.rank} of {self.suit}"
+    
+    def __repr__(self):
+        return self.__str__()
 
 deck = []
-for suit in Suit.ALL_SUITS:
-    for rank in Rank.ALL_RANKS:
+for suit in Suit:
+    for rank in [Rank(r) for r in Rank.ALL_RANKS]:
         deck.append(Card(suit, rank))
 
 print(len(deck))
 print(deck)
+print("Hi")
