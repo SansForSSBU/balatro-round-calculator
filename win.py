@@ -83,7 +83,37 @@ class Run():
         match decktype:
             case DeckType.STANDARD:
                 self.deck = self.makeStandardDeck()
-                
+        
+        self.hand_values = {
+            HandType.FLUSH_FIVE: [160, 16],
+            HandType.FLUSH_HOUSE: [140, 14],
+            HandType.FIVE_OF_A_KIND: [120, 12],
+            HandType.ROYAL_FLUSH: [100, 8],
+            HandType.STRAIGHT_FLUSH: [100, 8],
+            HandType.FOUR_OF_A_KIND: [60, 7],
+            HandType.FULL_HOUSE: [40, 4],
+            HandType.FLUSH: [35, 4],
+            HandType.STRAIGHT: [30, 4],
+            HandType.THREE_OF_A_KIND: [30, 3],
+            HandType.TWO_PAIR: [20, 2],
+            HandType.PAIR: [10, 2],
+            HandType.HIGH_CARD: [5, 1]
+        }
+
+class HandType(Enum):
+    FLUSH_FIVE = 0
+    FLUSH_HOUSE = 1
+    FIVE_OF_A_KIND = 2
+    ROYAL_FLUSH = 3
+    STRAIGHT_FLUSH = 4
+    FOUR_OF_A_KIND = 5
+    FULL_HOUSE = 6
+    FLUSH = 7
+    STRAIGHT = 8
+    THREE_OF_A_KIND = 9
+    TWO_PAIR = 10
+    PAIR = 11
+    HIGH_CARD = 12
 
 class Round():
     def __init__(self, run, quota):
@@ -101,6 +131,7 @@ class Round():
     def draw(self):
         while len(self.draw_pile) > 0 and len(self.hand) < self.hand_size:
             self.hand.append(self.draw_pile.pop(0))
+
 
 
 run = Run(DeckType.STANDARD)
